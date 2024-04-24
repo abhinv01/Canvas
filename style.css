@@ -38,7 +38,7 @@ h1 {
 
 #toolbar label {
     font-size: 12px;
-    color: darkslategray;
+    color:  #0f7171;
     margin-bottom: 0;
     margin-top: 5px;
 }
@@ -48,14 +48,20 @@ h1 {
 }
 
 #toolbar button {
-    background-color: #91EAE4;
+    background-color: #0f7171;
     border: none;
     border-radius: 4px;
     color:white;
     padding: 2px;
     font-weight: bold;
     cursor: pointer;
+    margin: 2rem 0;
 }
+
+#toolbar button:active {
+    background-color: #042626;
+    color: white;
+  }
 
 .drawing-board-cl{
     width: 100%;

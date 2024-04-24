@@ -1,6 +1,10 @@
 const canvas = document.getElementById("drawing-board-id")
 const toolbar = document.getElementById("toolbar");
 const ctx = canvas.getContext("2d");
+const lineWid = document.getElementById("lineWidth")
+const clearCanvas = document.getElementById("clear")
+
+
 
 let canvasOffsetX = canvas.offsetLeft;
 let canvasOffsetY = canvas.offsetTop;
@@ -58,20 +62,23 @@ function handleResize(e){
 
 
 
-toolbar.addEventListener("click",e => {
-    if(e.target.id === "clear"){
+clearCanvas.addEventListener("click",e => {
         ctx.clearRect(0,0,canvas.width,canvas.height)
-    }
 })
 
 toolbar.addEventListener("change",e => {
     if(e.target.id === "stroke"){
         strokeColor = e.target.value
     }
-    if(e.target.id === "lineWidth"){
-        lineWidth = e.target.value;
-    }
+    // if(e.target.id === "lineWidth"){
+    //     lineWidth = e.target.value;
+    // }
 })
+
+function handleWidthChange(){
+    lineWidth = this.value;
+}
+lineWid.addEventListener("change",handleWidthChange)
 
 canvas.addEventListener("mousedown",(e) => {
     isPainting=true;
@@ -93,7 +100,7 @@ canvas.addEventListener("mouseup",(e) => {
 canvas.addEventListener("touchstart", (e) => {
     isPainting = true;
     // Start painting at the touch point
-    console.log(e.touches[0]);
+    // console.log(e.touches[0]);
     draw(e.touches[0]);
 });
 
