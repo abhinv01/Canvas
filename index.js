@@ -1,9 +1,9 @@
-const canvas = document.getElementById("drawing-board")
+const canvas = document.getElementById("drawing-board-id")
 const toolbar = document.getElementById("toolbar");
 const ctx = canvas.getContext("2d");
 
-const canvasOffsetX = canvas.offsetLeft;
-const canvasOffsetY = canvas.offsetTop;
+let canvasOffsetX = canvas.offsetLeft;
+let canvasOffsetY = canvas.offsetTop;
 
 
 canvas.width = window.innerWidth - canvasOffsetX;
@@ -29,9 +29,31 @@ function draw(e){
     //clientX is X-value from browser window, subtracting canvasOffset as there is toolbar on left side
     //lineTo method takes X-value of canvas and not browser
     // start drawing from this coords 
+
+
+   /*  // alternate method
+    // const rect = canvas.getBoundingClientRect();
+    //     const x = touch.clientX - rect.left;
+    //     const y = touch.clientY - rect.top;
+
+    //     // Draw a line to the current touch position
+    //     ctx.lineTo(x, y); */
+   
     ctx.lineTo(e.clientX - canvasOffsetX, e.clientY );
     //actually draw
     ctx.stroke();
+}
+
+function handleResize(e){
+    // console.log(window.innerWidth);  
+    console.log(canvas.width);
+
+    canvasOffsetX = canvas.offsetLeft;
+    canvasOffsetY = canvas.offsetTop;
+
+
+    canvas.width = window.innerWidth - canvasOffsetX;
+    canvas.height = window.innerHeight - canvasOffsetY;
 }
 
 
@@ -66,7 +88,43 @@ canvas.addEventListener("mouseup",(e) => {
     ctx.beginPath();
 })
 
-//if mouse goes out of canvas stop painting
-canvas.addEventListener("mouseout",(e) => {
-    isPainting=false;
-})
+
+
+canvas.addEventListener("touchstart", (e) => {
+    isPainting = true;
+    // Start painting at the touch point
+    console.log(e.touches[0]);
+    draw(e.touches[0]);
+});
+
+// Function to handle touchmove event
+canvas.addEventListener("touchmove", (e) => {
+    // Prevent scrolling on touch devices
+    e.preventDefault();
+    // Continue painting while moving the touch point
+    draw(e.touches[0]);
+});
+
+// Function to handle touchend event
+canvas.addEventListener("touchend", () => {
+    isPainting = false;
+    // Begin a new path to start a new line after lifting the touch
+    ctx.beginPath();
+});
+
+
+window.addEventListener('resize', handleResize);
+
+// Function to handle drawing based on touch coordinates
+// function draw(touch) {
+//     if (!isPainting) return;
+
+//     // Get touch coordinates relative to the canvas
+//     const rect = canvas.getBoundingClientRect();
+//     const x = touch.clientX - rect.left;
+//     const y = touch.clientY - rect.top;
+
+//     // Draw a line to the current touch position
+//     ctx.lineTo(x, y);
+//     ctx.stroke();
+// }
