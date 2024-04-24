@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Drawing app</title>
+</head>
+<body>
+    <section class="container">
+        <div id="toolbar">
+            <h1>Draw.</h1>
+            <label for="stroke">Color</label>
+            <input id="stroke" name='stroke' type="color">
+            <label for="lineWidth">Line Width</label>
+            <input id="lineWidth" name='lineWidth' type="number" value="5">
+            <button id="clear">Clear</button>
+        </div>
+        <div class="drawing-board">
+            <canvas id="drawing-board"></canvas>
+        </div>
+    </section>
+    <script src="./index.js"></script>
+</body>
+</html>
+
+    <!-- <script>
+        let canvas = document.getElementById("draw")
+        let color = document.querySelector("#color")
+        let strokeWidth = document.querySelector("#strokeWidth")
+
+        const ctx = canvas.getContext("2d");
+        ctx.strokeStyle = "#BADASS";
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+
+
+
+
+        function draw(e){
+            if(!isDrawing) return;
+            console.log(e)
+
+            const localX = e.clientX - e.target.offsetLeft;
+            const localY = e.clientY - e.target.offsetTop;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX,lastY);    
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+
+        canvas.addEventListener("mousemove",draw)
+        canvas.addEventListener("mousedown",() => {
+            isDrawing = true
+        })
+        canvas.addEventListener("mouseup",() => {
+            isDrawing = false
+        })
+        canvas.addEventListener("mouseout",() => {
+            isDrawing = false
+        })
+        strokeWidth.addEventListener("change",function(e){
+            console.log(this.value)
+        })
+        color.addEventListener("change",function(e){
+            console.log(this.value)
+        })
+ 
+ </script> -->
